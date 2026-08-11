@@ -34,6 +34,42 @@ A unidade não precisa de um gerente para existir, então na tabela de unidade p
 
 \-----
 
+**Endereço:**
+
+
+
+\-logradouro 
+
+\-número,
+
+\-complemento
+
+\-bairro
+
+\-cidade
+
+\-UF
+
+\-CEP
+
+
+
+
+
+\-----
+
+
+
+
+
+
+
+
+
+
+
+\-----
+
 
 
 **Colaborador (FILHO de colaborador)**:
@@ -110,7 +146,7 @@ telefones.
 
 
 
-
+A idade do cliente só é retornada para o frontend poder utilizar e não armazenada no banco
 
 \------
 
