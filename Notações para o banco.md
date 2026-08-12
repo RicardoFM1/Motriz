@@ -191,6 +191,7 @@ pecas_id (unique)
 servicos_id (unique)
 os_id (cascade)
 
+Tentar lancar o mesmo serviço na OS não pode e isso é feito pela API.
 
 
 Verificar na api para impedir de deletar servicos, pecas, clientes ou veiculos que já foram associados a uma OS.
