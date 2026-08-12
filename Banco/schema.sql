@@ -179,6 +179,20 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
+-- Table `motriz`.`avaliacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `motriz`.`avaliacao` (
+  `id` INT NOT NULL,
+  `nota` INT NOT NULL,
+  `comentario` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `chk_avaliacao_nota`
+  CHECK(`nota` BETWEEN 0 AND 10)
+  )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `motriz`.`ordem_de_servico`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `motriz`.`ordem_de_servico` (
@@ -196,6 +210,7 @@ CREATE TABLE IF NOT EXISTS `motriz`.`ordem_de_servico` (
   `desconto_gerente` INT(11) NOT NULL,
   `preco_total_os` INT(11) NULL DEFAULT NULL,
   `cliente_id` INT NOT NULL,
+  `avaliacao_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_os_veiculo_idx` (`veiculo_id` ASC) ,
   INDEX `fk_os_mecanico_idx` (`mecanico_id` ASC) ,
@@ -203,6 +218,7 @@ CREATE TABLE IF NOT EXISTS `motriz`.`ordem_de_servico` (
   INDEX `fk_os_unidade_idx` (`unidade_id` ASC) ,
   UNIQUE INDEX `numero_UNIQUE` (`numero` ASC) ,
   INDEX `fk_os_cliente_idx` (`cliente_id` ASC) ,
+  INDEX `fk_os_avaliacao_idx` (`avaliacao_id` ASC) ,
   CONSTRAINT `fk_os_atendente`
     FOREIGN KEY (`atendente_id`)
     REFERENCES `motriz`.`colaborador` (`id`)
@@ -227,7 +243,12 @@ CREATE TABLE IF NOT EXISTS `motriz`.`ordem_de_servico` (
     FOREIGN KEY (`cliente_id`)
     REFERENCES `motriz`.`cliente` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_os_avaliacao`
+    FOREIGN KEY (`avaliacao_id`)
+    REFERENCES `motriz`.`avaliacao` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL)
 ENGINE = InnoDB
 AUTO_INCREMENT = 41
 DEFAULT CHARACTER SET = utf8mb4;
