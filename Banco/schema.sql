@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`unidade` (
   `status` ENUM('ativo', 'inativo') NOT NULL,
   `endereco_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_unidade_endereco_idx` (`endereco_id` ASC)  ,
+  INDEX `fk_unidade_endereco_idx` (`endereco_id` ASC) ,
   CONSTRAINT `fk_unidade_endereco`
     FOREIGN KEY (`endereco_id`)
     REFERENCES `Motriz`.`endereco` (`id`)
@@ -64,10 +64,10 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`colaborador` (
   `colaborador_id` INT NOT NULL,
   `unidade_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC)  ,
-  UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC)  ,
-  INDEX `fk_colaborador_unidade_idx` (`unidade_id` ASC)  ,
-  INDEX `fk_colaborador_colaborador_idx` (`colaborador_id` ASC)  ,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) ,
+  UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC) ,
+  INDEX `fk_colaborador_unidade_idx` (`unidade_id` ASC) ,
+  INDEX `fk_colaborador_colaborador_idx` (`colaborador_id` ASC) ,
   CONSTRAINT `fk_colaborador_unidade`
     FOREIGN KEY (`unidade_id`)
     REFERENCES `Motriz`.`unidade` (`id`)
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`cliente` (
   `endereco_id` INT NOT NULL,
   `observacoes` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_cliente_endereco_idx` (`endereco_id` ASC)  ,
+  INDEX `fk_cliente_endereco_idx` (`endereco_id` ASC) ,
   CONSTRAINT `fk_cliente_endereco`
     FOREIGN KEY (`endereco_id`)
     REFERENCES `Motriz`.`endereco` (`id`)
@@ -112,9 +112,9 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`telefone` (
   `numero_externo` VARCHAR(45) NULL,
   `cliente_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_telefone_cliente_idx` (`cliente_id` ASC)  ,
-  UNIQUE INDEX `cliente_id_UNIQUE` (`cliente_id` ASC)  ,
-  UNIQUE INDEX `numero_celular_UNIQUE` (`numero_celular` ASC)  ,
+  INDEX `fk_telefone_cliente_idx` (`cliente_id` ASC) ,
+  UNIQUE INDEX `cliente_id_UNIQUE` (`cliente_id` ASC) ,
+  UNIQUE INDEX `numero_celular_UNIQUE` (`numero_celular` ASC) ,
   CONSTRAINT `fk_telefone_cliente`
     FOREIGN KEY (`cliente_id`)
     REFERENCES `Motriz`.`cliente` (`id`)
@@ -137,8 +137,8 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`veiculo` (
   `quilometragem` INT NOT NULL,
   `cliente_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `placa_UNIQUE` (`placa` ASC)  ,
-  INDEX `fk_veiculo_cliente_idx` (`cliente_id` ASC)  ,
+  UNIQUE INDEX `placa_UNIQUE` (`placa` ASC) ,
+  INDEX `fk_veiculo_cliente_idx` (`cliente_id` ASC) ,
   CONSTRAINT `fk_veiculo_cliente`
     FOREIGN KEY (`cliente_id`)
     REFERENCES `Motriz`.`cliente` (`id`)
@@ -165,8 +165,8 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`categoria` (
   `nome` VARCHAR(45) NOT NULL,
   `subcategoria_id` INT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC)  ,
-  INDEX `fk_categoria_subcategoria_idx` (`subcategoria_id` ASC)  ,
+  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC) ,
+  INDEX `fk_categoria_subcategoria_idx` (`subcategoria_id` ASC) ,
   CONSTRAINT `fk_categoria_subcategoria`
     FOREIGN KEY (`subcategoria_id`)
     REFERENCES `Motriz`.`subcategoria` (`id`)
@@ -190,15 +190,15 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`servico` (
   `colaborador_id` INT NOT NULL,
   `quantidade` INT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC)  ,
-  INDEX `fk_servicos_colaborador_idx` (`colaborador_id` ASC)  ,
-  INDEX `FK_servico_categoria_idx` (`categoria_id` ASC)  ,
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) ,
+  INDEX `fk_servicos_colaborador_idx` (`colaborador_id` ASC) ,
+  INDEX `FK_servico_categoria_idx` (`categoria_id` ASC) ,
   CONSTRAINT `fk_servico_colaborador`
     FOREIGN KEY (`colaborador_id`)
     REFERENCES `Motriz`.`colaborador` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `FK_servico_categoria`
+  CONSTRAINT `fk_servico_categoria`
     FOREIGN KEY (`categoria_id`)
     REFERENCES `Motriz`.`categoria` (`id`)
     ON DELETE NO ACTION
@@ -231,8 +231,8 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`peca` (
   `estoque_minimo` INT NOT NULL,
   `fornecedor_id` INT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC),
-  INDEX `fk_pecas_fornecedor_idx` (`fornecedor_id` ASC),
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) ,
+  INDEX `fk_pecas_fornecedor_idx` (`fornecedor_id` ASC) ,
   CONSTRAINT `fk_pecas_fornecedor`
     FOREIGN KEY (`fornecedor_id`)
     REFERENCES `Motriz`.`fornecedor` (`id`)
@@ -242,9 +242,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Motriz`.`painel`
+-- Table `Motriz`.`movimentacao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Motriz`.`painel` (
+CREATE TABLE IF NOT EXISTS `Motriz`.`movimentacao` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `estoque_atual` INT NOT NULL,
   `peca_id` INT NOT NULL,
@@ -255,20 +255,20 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`painel` (
   `colaborador_id` INT NOT NULL,
   `os_id` INT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_painel_peca_idx` (`peca_id` ASC)  ,
-  INDEX `fk_painel_fornecedor_idx` (`fornecedor_id` ASC)  ,
-  INDEX `fk_painel_colaborador_idx` (`colaborador_id` ASC)  ,
-  CONSTRAINT `fk_painel_peca`
+  INDEX `fk_painel_peca_idx` (`peca_id` ASC) ,
+  INDEX `fk_painel_fornecedor_idx` (`fornecedor_id` ASC) ,
+  INDEX `fk_painel_colaborador_idx` (`colaborador_id` ASC) ,
+  CONSTRAINT `fk_movimentacao_peca`
     FOREIGN KEY (`peca_id`)
     REFERENCES `Motriz`.`peca` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_painel_fornecedor`
+  CONSTRAINT `fk_movimentacao_fornecedor`
     FOREIGN KEY (`fornecedor_id`)
     REFERENCES `Motriz`.`fornecedor` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_painel_colaborador`
+  CONSTRAINT `fk_movimentacao_colaborador`
     FOREIGN KEY (`colaborador_id`)
     REFERENCES `Motriz`.`colaborador` (`id`)
     ON DELETE NO ACTION
@@ -291,15 +291,13 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`ordem_de_servico` (
   `previsao_de_entrega` DATE NULL,
   `status` ENUM('aberta', 'orçamento', 'aprovada', 'em_execução', 'aguardando_peca', 'finalizada', 'entregue', 'cancelado') NOT NULL DEFAULT 'aberta',
   `observações` VARCHAR(255) NULL,
-  `quantidade_peca` INT NOT NULL,
-  `preco_total_peca` INT NULL,
   `desconto_gerente` INT NOT NULL,
   `preco_total_os` INT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_os_veiculo_idx` (`veiculo_id` ASC)  ,
-  INDEX `fk_os_mecanico_idx` (`mecanico_id` ASC)  ,
-  INDEX `fk_os_atendente_idx` (`atendente_id` ASC)  ,
-  UNIQUE INDEX `unidade_id_UNIQUE` (`unidade_id` ASC)  ,
+  INDEX `fk_os_veiculo_idx` (`veiculo_id` ASC) ,
+  INDEX `fk_os_mecanico_idx` (`mecanico_id` ASC) ,
+  INDEX `fk_os_atendente_idx` (`atendente_id` ASC) ,
+  UNIQUE INDEX `unidade_id_UNIQUE` (`unidade_id` ASC) ,
   CONSTRAINT `fk_os_veiculo`
     FOREIGN KEY (`veiculo_id`)
     REFERENCES `Motriz`.`veiculo` (`id`)
@@ -324,28 +322,32 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Motriz`.`servico_os_peca`
+-- Table `Motriz`.`item_os`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Motriz`.`servico_os_peca` (
+CREATE TABLE IF NOT EXISTS `Motriz`.`item_os` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `peca_id` INT NOT NULL,
   `servico_id` INT NOT NULL,
   `os_id` INT NOT NULL,
+  `quantidade_peca` INT NULL,
+  `quantidade_servico` INT NULL,
+  `preco_total_peca` INT NULL,
+  `preco_total_servico` INT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `peca_id_UNIQUE` (`peca_id` ASC)  ,
-  UNIQUE INDEX `servico_id_UNIQUE` (`servico_id` ASC)  ,
-  INDEX `fk_servico_os_peca_os_idx` (`os_id` ASC)  ,
-  CONSTRAINT `fk_servico_os_peca_peca`
+  UNIQUE INDEX `peca_id_UNIQUE` (`peca_id` ASC) ,
+  UNIQUE INDEX `servico_id_UNIQUE` (`servico_id` ASC) ,
+  INDEX `fk_servico_os_peca_os_idx` (`os_id` ASC) ,
+  CONSTRAINT `fk_item_os_peca`
     FOREIGN KEY (`peca_id`)
     REFERENCES `Motriz`.`peca` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_servico_os_peca_servico`
+  CONSTRAINT `fk_item_os_servico`
     FOREIGN KEY (`servico_id`)
     REFERENCES `Motriz`.`servico` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_servico_os_peca_os`
+  CONSTRAINT `fk_item_os_os`
     FOREIGN KEY (`os_id`)
     REFERENCES `Motriz`.`ordem_de_servico` (`id`)
     ON DELETE CASCADE
@@ -365,8 +367,8 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`pagamento` (
   `colaborador_id` INT NOT NULL,
   `os_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_pagamento_colaborador_idx` (`colaborador_id` ASC)  ,
-  INDEX `fk_pagamento_os_idx` (`os_id` ASC)  ,
+  INDEX `fk_pagamento_colaborador_idx` (`colaborador_id` ASC) ,
+  INDEX `fk_pagamento_os_idx` (`os_id` ASC) ,
   CONSTRAINT `fk_pagamento_colaborador`
     FOREIGN KEY (`colaborador_id`)
     REFERENCES `Motriz`.`colaborador` (`id`)
