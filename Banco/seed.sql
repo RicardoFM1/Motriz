@@ -45,9 +45,9 @@ VALUES
 INSERT INTO unidade
 (id, nome, telefone, status, endereco_id)
 VALUES
-(1, 'Motriz Centro', '(11) 3000-1001', 'ativo', 1),
-(2, 'Motriz Mooca', '(11) 3000-1002', 'ativo', 2),
-(3, 'Motriz Tatuapé', '(11) 3000-1003', 'ativo', 3);
+(1, 'Porto Alegre', '(11) 3000-1001', 'ativo', 1),
+(2, 'Caxias do Sul', '(11) 3000-1002', 'ativo', 2),
+(3, 'Pelotas', '(11) 3000-1003', 'ativo', 3);
 
 -- =========================================================
 -- 3. COLABORADORES
