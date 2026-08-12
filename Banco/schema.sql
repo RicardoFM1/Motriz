@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `motriz`.`veiculo` (
   `placa` VARCHAR(45) NOT NULL,
   `marca` VARCHAR(45) NOT NULL,
   `modelo` VARCHAR(45) NOT NULL,
-  `ano_fabricacao` YEAR(4) NOT NULL,
+  `ano_de_fabricacao` YEAR(4) NOT NULL,
   `cor` VARCHAR(45) NOT NULL,
   `tipo_de_combustivel` VARCHAR(45) NOT NULL,
   `quilometragem` INT(11) NOT NULL,
@@ -172,7 +172,10 @@ CREATE TABLE IF NOT EXISTS `motriz`.`veiculo` (
     FOREIGN KEY (`cliente_id`)
     REFERENCES `motriz`.`cliente` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+    CONSTRAINT `chk_ano_fabricacao` 
+    CHECK (`ano_de_fabricacao` BETWEEN 1900 AND 2027)
+    )
 ENGINE = InnoDB
 AUTO_INCREMENT = 26
 DEFAULT CHARACTER SET = utf8mb4;
@@ -341,7 +344,10 @@ CREATE TABLE IF NOT EXISTS `motriz`.`item_os` (
     FOREIGN KEY (`servico_id`)
     REFERENCES `motriz`.`servico` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+    UNIQUE(os_id, servico_id),
+    UNIQUE(os_id, peca_id)
+    )
 ENGINE = InnoDB
 AUTO_INCREMENT = 101
 DEFAULT CHARACTER SET = utf8mb4;
