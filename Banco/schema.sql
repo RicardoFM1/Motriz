@@ -191,16 +191,18 @@ CREATE TABLE IF NOT EXISTS `motriz`.`ordem_de_servico` (
   `quilometragem` INT(11) NOT NULL,
   `data_e_hora` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
   `previsao_de_entrega` DATE NULL DEFAULT NULL,
-  `status` ENUM('aberta', 'orçamento', 'aprovada', 'em_execução', 'aguardando_peca', 'finalizada', 'entregue', 'cancelado') NULL DEFAULT 'aberta',
+  `status` ENUM('aberta', 'orçamento', 'aprovada', 'em_execução', 'aguardando_peca', 'finalizada', 'entregue', 'cancelado') NOT NULL DEFAULT 'aberta',
   `observações` VARCHAR(255) NULL DEFAULT NULL,
   `desconto_gerente` INT(11) NOT NULL,
   `preco_total_os` INT(11) NULL DEFAULT NULL,
+  `cliente_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_os_veiculo_idx` (`veiculo_id` ASC) ,
   INDEX `fk_os_mecanico_idx` (`mecanico_id` ASC) ,
   INDEX `fk_os_atendente_idx` (`atendente_id` ASC) ,
   INDEX `fk_os_unidade_idx` (`unidade_id` ASC) ,
   UNIQUE INDEX `numero_UNIQUE` (`numero` ASC) ,
+  INDEX `fk_os_cliente_idx` (`cliente_id` ASC) ,
   CONSTRAINT `fk_os_atendente`
     FOREIGN KEY (`atendente_id`)
     REFERENCES `motriz`.`colaborador` (`id`)
@@ -219,6 +221,11 @@ CREATE TABLE IF NOT EXISTS `motriz`.`ordem_de_servico` (
   CONSTRAINT `fk_os_veiculo`
     FOREIGN KEY (`veiculo_id`)
     REFERENCES `motriz`.`veiculo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_os_cliente`
+    FOREIGN KEY (`cliente_id`)
+    REFERENCES `motriz`.`cliente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -351,8 +358,8 @@ CREATE TABLE IF NOT EXISTS `motriz`.`movimentacao` (
   CONSTRAINT `fk_movimentacao_os`
     FOREIGN KEY (`os_id`)
     REFERENCES `motriz`.`ordem_de_servico` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_movimentacao_peca`
     FOREIGN KEY (`peca_id`)
     REFERENCES `motriz`.`peca` (`id`)
@@ -385,8 +392,8 @@ CREATE TABLE IF NOT EXISTS `motriz`.`pagamento` (
   CONSTRAINT `fk_pagamento_os`
     FOREIGN KEY (`os_id`)
     REFERENCES `motriz`.`ordem_de_servico` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT)
 ENGINE = InnoDB
 AUTO_INCREMENT = 26
 DEFAULT CHARACTER SET = utf8mb4;

@@ -265,13 +265,11 @@ INNER JOIN ordem_de_servico os
 WHERE
     c.perfil = 'mecanico'
     AND os.status = 'finalizada'
-    AND YEAR(os.data_e_hora) = YEAR(CURDATE())
-    AND MONTH(os.data_e_hora) = MONTH(CURDATE())
+    AND YEAR(os.data_e_hora) = 2026
+    AND MONTH(os.data_e_hora) = 8
 GROUP BY
     c.id,
     c.nome
-HAVING
-    COUNT(os.id) >= 5
 ORDER BY
     quantidade_os_finalizadas DESC;
 

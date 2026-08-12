@@ -115,7 +115,28 @@ VALUES
 (17, 'Karen Souza', '16161616161', 'karen.souza@email.com', '1998-09-09', 20, 'Cliente pessoa física'),
 (18, 'Luiz Henrique', '17171717171', 'luiz.henrique@email.com', '1989-07-27', 21, 'Cliente pessoa física'),
 (19, 'Márcia Regina', '18181818181', 'marcia.regina@email.com', '1981-11-11', 22, 'Cliente pessoa física'),
-(20, 'Nathália Alves', '19292929292', 'nathalia.alves@email.com', '1994-03-16', 23, 'Cliente pessoa física');
+(20, 'Nathália Alves', '19292929292', 'nathalia.alves@email.com', '1994-03-16', 23, 'Cliente pessoa física'),
+(21, 'Otávio Martins', '20202020202', 'otavio.martins@email.com', '1986-01-14', 4, 'Cliente pessoa física'),
+(22, 'Patrícia Gomes', '21212121212', 'patricia.gomes@email.com', '1990-05-23', 5, 'Cliente pessoa física'),
+(23, 'Rafael Moreira', '23232323232', 'rafael.moreira@email.com', '1984-08-19', 6, 'Cliente pessoa física'),
+(24, 'Sandra Cristina', '24242424242', 'sandra.cristina@email.com', '1979-12-07', 7, 'Cliente recorrente'),
+(25, 'Thiago Rodrigues', '25252525252', 'thiago.rodrigues@email.com', '1992-02-28', 8, 'Cliente pessoa física'),
+(26, 'Úrsula Mendes', '26262626262', 'ursula.mendes@email.com', '1987-06-15', 9, 'Cliente pessoa física'),
+(27, 'Victor Hugo Martins', '27272727272', 'victor.martins@email.com', '1991-10-03', 10, 'Cliente pessoa física'),
+(28, 'Wagner Ferreira', '28282828282', 'wagner.ferreira@email.com', '1983-03-21', 11, 'Cliente pessoa física'),
+(29, 'Yasmin Oliveira', '29292929292', 'yasmin.oliveira@email.com', '1997-07-12', 12, 'Cliente pessoa física'),
+(30, 'Zélia Maria', '30303030303', 'zelia.maria@email.com', '1976-11-25', 13, 'Cliente pessoa física'),
+(31, 'André Luiz', '31313131313', 'andre.luiz@email.com', '1988-04-17', 14, 'Cliente pessoa física'),
+(32, 'Bruna Carvalho', '32323232323', 'bruna.carvalho@email.com', '1993-09-06', 15, 'Cliente pessoa física'),
+(33, 'Caio Henrique', '34343434343', 'caio.henrique@email.com', '1985-12-13', 16, 'Cliente pessoa física'),
+(34, 'Débora Martins', '35353535353', 'debora.martins@email.com', '1994-01-29', 17, 'Cliente pessoa física'),
+(35, 'Fernando Souza', '36363636363', 'fernando.souza@email.com', '1981-06-08', 18, 'Cliente pessoa física'),
+(36, 'Giovana Pereira', '37373737373', 'giovana.pereira@email.com', '1996-10-20', 19, 'Cliente pessoa física'),
+(37, 'Hugo César', '38383838383', 'hugo.cesar@email.com', '1989-05-11', 20, 'Cliente pessoa física'),
+(38, 'Juliana Mendes', '39393939393', 'juliana.mendes@email.com', '1992-08-26', 21, 'Cliente pessoa física'),
+(39, 'Marcelo Andrade', '40404040404', 'marcelo.andrade@email.com', '1980-02-09', 22, 'Cliente recorrente'),
+(40, 'Renata Alves', '41414141414', 'renata.alves@email.com', '1995-11-18', 23, 'Cliente pessoa física');
+
 
 -- =========================================================
 -- 5. TELEFONES
@@ -326,57 +347,58 @@ VALUES
 INSERT INTO ordem_de_servico
 (id, numero, unidade_id, veiculo_id, mecanico_id, atendente_id,
  quilometragem, data_e_hora, previsao_de_entrega,
- observações, desconto_gerente, preco_total_os)
+ observações, desconto_gerente, preco_total_os, cliente_id)
 VALUES
-(1, 1001, 1, 1, 4, 3, 65000, '2026-05-05 09:00:00', '2026-05-06', 'Troca de óleo e revisão', 0, 18000);
+(1, 1001, 1, 1, 4, 3, 65000, '2026-05-05 09:00:00', '2026-05-06', 'Troca de óleo e revisão', 0, 18000, 1);
 
 
 INSERT INTO ordem_de_servico
 (id, numero, unidade_id, veiculo_id, mecanico_id, atendente_id,
  quilometragem, data_e_hora, previsao_de_entrega, status,
- observações, desconto_gerente, preco_total_os)
+ observações, desconto_gerente, preco_total_os, cliente_id)
 VALUES
-(2, 1002, 1, 2, 4, 3, 72000, '2026-05-08 10:00:00', '2026-05-09', 'entregue', 'Revisão de freios', 1000, 30000),
-(3, 1003, 1, 3, 4, 3, 38000, '2026-05-12 08:30:00', '2026-05-13', 'finalizada', 'Alinhamento', 0, 10000),
-(4, 1004, 1, 4, 4, 3, 45000, '2026-05-18 11:00:00', '2026-05-19', 'entregue', 'Troca de pastilhas', 0, 16000),
-(5, 1005, 1, 5, NULL, 3, 51000, '2026-05-22 09:30:00', '2026-05-24', 'aberta', 'Aguardando avaliação', 0, 12000),
-(6, 1006, 1, 6, 4, 3, 30000, '2026-05-27 13:00:00', '2026-05-28', 'orçamento', 'Cliente solicitou orçamento', 0, 25000),
-(7, 1007, 2, 7, 8, 7, 85000, '2026-06-02 09:00:00', '2026-06-04', 'aprovada', 'Orçamento aprovado', 2000, 28000),
-(8, 1008, 2, 8, 8, 7, 49000, '2026-06-05 10:00:00', '2026-06-07', 'em_execução', 'Serviço em andamento', 0, 30000),
-(9, 1009, 2, 9, 8, 7, 35000, '2026-06-10 08:00:00', '2026-06-12', 'aguardando_peca', 'Aguardando amortecedor', 0, 44000),
-(10, 1010, 2, 10, 8, 7, 61000, '2026-06-14 14:00:00', '2026-06-15', 'finalizada', 'Serviço concluído', 0, 20000),
-(11, 1011, 2, 11, 8, 7, 90000, '2026-06-18 09:00:00', '2026-06-19', 'entregue', 'Veículo entregue', 0, 35000),
-(12, 1012, 2, 12, NULL, 7, 18000, '2026-06-22 10:00:00', '2026-06-24', 'aberta', 'Aguardando mecânico', 0, 15000),
-(13, 1013, 3, 13, 10, 9, 55000, '2026-06-28 09:00:00', '2026-06-30', 'cancelado', 'Cliente cancelou o serviço', 0, 0),
+(2, 1002, 1, 2, 4, 3, 72000, '2026-05-08 10:00:00', '2026-05-09', 'entregue', 'Revisão de freios', 1000, 30000, 2),
+(3, 1003, 1, 3, 4, 3, 38000, '2026-05-12 08:30:00', '2026-05-13', 'finalizada', 'Alinhamento', 0, 10000, 3),
+(4, 1004, 1, 4, 4, 3, 45000, '2026-05-18 11:00:00', '2026-05-19', 'entregue', 'Troca de pastilhas', 0, 16000, 4),
+(5, 1005, 1, 5, NULL, 3, 51000, '2026-05-22 09:30:00', '2026-05-24', 'aberta', 'Aguardando avaliação', 0, 12000, 5),
+(6, 1006, 1, 6, 4, 3, 30000, '2026-05-27 13:00:00', '2026-05-28', 'orçamento', 'Cliente solicitou orçamento', 0, 25000, 6),
+(7, 1007, 2, 7, 8, 7, 85000, '2026-06-02 09:00:00', '2026-06-04', 'aprovada', 'Orçamento aprovado', 2000, 28000, 7),
+(8, 1008, 2, 8, 8, 7, 49000, '2026-06-05 10:00:00', '2026-06-07', 'em_execução', 'Serviço em andamento', 0, 30000, 8),
+(9, 1009, 2, 9, 8, 7, 35000, '2026-06-10 08:00:00', '2026-06-12', 'aguardando_peca', 'Aguardando amortecedor', 0, 44000, 9),
+(10, 1010, 2, 10, 8, 7, 61000, '2026-06-14 14:00:00', '2026-06-15', 'finalizada', 'Serviço concluído', 0, 20000, 10),
+(11, 1011, 2, 11, 8, 7, 90000, '2026-06-18 09:00:00', '2026-06-19', 'entregue', 'Veículo entregue', 0, 35000, 11),
+(12, 1012, 2, 12, NULL, 7, 18000, '2026-06-22 10:00:00', '2026-06-24', 'aberta', 'Aguardando mecânico', 0, 15000, 12),
+(13, 1013, 3, 13, 10, 9, 55000, '2026-06-28 09:00:00', '2026-06-30', 'cancelado', 'Cliente cancelou o serviço', 0, 0, 13),
 
-(14, 1014, 1, 14, 4, 3, 97000, '2026-07-02 09:00:00', '2026-07-04', 'aberta', 'Diagnóstico pendente', 0, 18000),
-(15, 1015, 1, 15, 4, 3, 29000, '2026-07-04 10:00:00', '2026-07-05', 'orçamento', 'Aguardando aprovação', 0, 32000),
-(16, 1016, 1, 16, 4, 3, 42000, '2026-07-06 11:00:00', '2026-07-08', 'aprovada', 'Aprovado pelo cliente', 1000, 25000),
-(17, 1017, 1, 17, 4, 3, 78000, '2026-07-08 13:00:00', '2026-07-10', 'em_execução', 'Troca de suspensão', 0, 42000),
-(18, 1018, 1, 18, 4, 3, 68000, '2026-07-10 08:30:00', '2026-07-11', 'aguardando_peca', 'Peça em transporte', 0, 30000),
-(19, 1019, 2, 19, 8, 7, 27000, '2026-07-12 09:00:00', '2026-07-13', 'finalizada', 'Finalizada sem pagamento', 0, 20000),
-(20, 1020, 2, 20, 8, 7, 46000, '2026-07-14 10:00:00', '2026-07-15', 'entregue', 'Pagamento integral', 0, 30000),
-(21, 1021, 2, 21, 8, 7, 105000, '2026-07-16 09:00:00', '2026-07-18', 'aberta', 'Diagnóstico solicitado', 0, 15000),
-(22, 1022, 2, 22, NULL, 7, 73000, '2026-07-17 14:00:00', '2026-07-20', 'aberta', 'Sem mecânico definido', 0, 20000),
-(23, 1023, 2, 23, 8, 7, 16000, '2026-07-18 08:00:00', '2026-07-19', 'orçamento', 'Orçamento enviado', 0, 28000),
-(24, 1024, 2, 24, 8, 7, 80000, '2026-07-19 09:30:00', '2026-07-21', 'aprovada', 'Serviço autorizado', 0, 35000),
-(25, 1025, 3, 25, 10, 9, 112000, '2026-07-20 10:00:00', '2026-07-22', 'em_execução', 'Revisão geral', 0, 50000),
-(26, 1026, 3, 1, 10, 9, 66000, '2026-07-21 09:00:00', '2026-07-23', 'aguardando_peca', 'Aguardando filtro', 0, 18000),
-(27, 1027, 3, 2, 10, 9, 73000, '2026-07-22 08:00:00', '2026-07-24', 'finalizada', 'Finalizada sem pagamento', 0, 22000),
-(28, 1028, 3, 3, 10, 9, 39000, '2026-07-23 10:00:00', '2026-07-24', 'entregue', 'Pagamento em parcelas', 0, 40000),
-(29, 1029, 3, 4, 10, 9, 46000, '2026-07-24 13:00:00', '2026-07-26', 'aberta', 'Cliente aguardando retorno', 0, 15000),
-(30, 1030, 3, 5, NULL, 9, 52000, '2026-07-25 09:00:00', '2026-07-27', 'aberta', 'Sem mecânico definido', 0, 25000),
+(14, 1014, 1, 14, 4, 3, 97000, '2026-07-02 09:00:00', '2026-07-04', 'aberta', 'Diagnóstico pendente', 0, 18000, 14),
+(15, 1015, 1, 15, 4, 3, 29000, '2026-07-04 10:00:00', '2026-07-05', 'orçamento', 'Aguardando aprovação', 0, 32000, 15),
+(16, 1016, 1, 16, 4, 3, 42000, '2026-07-06 11:00:00', '2026-07-08', 'aprovada', 'Aprovado pelo cliente', 1000, 25000, 16),
+(17, 1017, 1, 17, 4, 3, 78000, '2026-07-08 13:00:00', '2026-07-10', 'em_execução', 'Troca de suspensão', 0, 42000, 17),
+(18, 1018, 1, 18, 4, 3, 68000, '2026-07-10 08:30:00', '2026-07-11', 'aguardando_peca', 'Peça em transporte', 0, 30000, 18),
+(19, 1019, 2, 19, 8, 7, 27000, '2026-07-12 09:00:00', '2026-07-13', 'finalizada', 'Finalizada sem pagamento', 0, 20000, 19),
+(20, 1020, 2, 20, 8, 7, 46000, '2026-07-14 10:00:00', '2026-07-15', 'entregue', 'Pagamento integral', 0, 30000, 20),
+(21, 1021, 2, 21, 8, 7, 105000, '2026-07-16 09:00:00', '2026-07-18', 'aberta', 'Diagnóstico solicitado', 0, 15000, 21),
+(22, 1022, 2, 22, NULL, 7, 73000, '2026-07-17 14:00:00', '2026-07-20', 'aberta', 'Sem mecânico definido', 0, 20000, 22),
+(23, 1023, 2, 23, 8, 7, 16000, '2026-07-18 08:00:00', '2026-07-19', 'orçamento', 'Orçamento enviado', 0, 28000, 23),
+(24, 1024, 2, 24, 8, 7, 80000, '2026-07-19 09:30:00', '2026-07-21', 'aprovada', 'Serviço autorizado', 0, 35000, 24),
+(25, 1025, 3, 25, 10, 9, 112000, '2026-07-20 10:00:00', '2026-07-22', 'em_execução', 'Revisão geral', 0, 50000, 25),
+(26, 1026, 3, 1, 10, 9, 66000, '2026-07-21 09:00:00', '2026-07-23', 'aguardando_peca', 'Aguardando filtro', 0, 18000, 26),
+(27, 1027, 3, 2, 10, 9, 73000, '2026-07-22 08:00:00', '2026-07-24', 'finalizada', 'Finalizada sem pagamento', 0, 22000, 27),
+(28, 1028, 3, 3, 10, 9, 39000, '2026-07-23 10:00:00', '2026-07-24', 'entregue', 'Pagamento em parcelas', 0, 40000, 28),
+(29, 1029, 3, 4, 10, 9, 46000, '2026-07-24 13:00:00', '2026-07-26', 'aberta', 'Cliente aguardando retorno', 0, 15000, 29),
+(30, 1030, 3, 5, NULL, 9, 52000, '2026-07-25 09:00:00', '2026-07-27', 'aberta', 'Sem mecânico definido', 0, 25000, 30),
 
-(31, 1031, 1, 6, 4, 3, 31000, '2026-08-01 09:00:00', '2026-08-03', 'orçamento', 'Orçamento em análise', 0, 30000),
-(32, 1032, 1, 7, 4, 3, 86000, '2026-08-02 10:00:00', '2026-08-04', 'aprovada', 'Cliente aprovou', 1000, 28000),
-(33, 1033, 1, 8, 4, 3, 50000, '2026-08-03 09:00:00', '2026-08-05', 'em_execução', 'Em manutenção', 0, 45000),
-(34, 1034, 1, 9, 4, 3, 36000, '2026-08-04 11:00:00', '2026-08-06', 'aguardando_peca', 'Aguardando peça', 0, 30000),
-(35, 1035, 2, 10, 8, 7, 62000, '2026-08-05 08:00:00', '2026-08-06', 'finalizada', 'Finalizada sem pagamento', 0, 18000),
-(36, 1036, 2, 11, 8, 7, 91000, '2026-08-06 09:00:00', '2026-08-07', 'entregue', 'Pagamento integral', 0, 35000),
-(37, 1037, 2, 12, 8, 7, 19000, '2026-08-07 10:00:00', '2026-08-08', 'entregue', 'Pagamento integral', 0, 22000),
-(38, 1038, 3, 13, 10, 9, 56000, '2026-08-08 09:00:00', '2026-08-09', 'entregue', 'Pagamento integral', 0, 30000),
-(39, 1039, 3, 14, 10, 9, 98000, '2026-08-09 11:00:00', '2026-08-11', 'aberta', 'Aberta há mais de 7 dias', 0, 25000),
-(40, 1040, 3, 15, 10, 9, 30000, '2026-08-10 13:00:00', '2026-08-12', 'cancelado', 'Serviço cancelado', 0, 0);
+(31, 1031, 1, 6, 4, 3, 31000, '2026-08-01 09:00:00', '2026-08-03', 'orçamento', 'Orçamento em análise', 0, 30000, 31),
+(32, 1032, 1, 7, 4, 3, 86000, '2026-08-02 10:00:00', '2026-08-04', 'aprovada', 'Cliente aprovou', 1000, 28000, 32),
+(33, 1033, 1, 8, 4, 3, 50000, '2026-08-03 09:00:00', '2026-08-05', 'em_execução', 'Em manutenção', 0, 45000, 33),
+(34, 1034, 1, 9, 4, 3, 36000, '2026-08-04 11:00:00', '2026-08-06', 'aguardando_peca', 'Aguardando peça', 0, 30000, 34),
+(35, 1035, 2, 10, 8, 7, 62000, '2026-08-05 08:00:00', '2026-08-06', 'finalizada', 'Finalizada sem pagamento', 0, 18000, 35),
+(36, 1036, 2, 11, 8, 7, 91000, '2026-08-06 09:00:00', '2026-08-07', 'entregue', 'Pagamento integral', 0, 35000, 36),
+(37, 1037, 2, 12, 8, 7, 19000, '2026-08-07 10:00:00', '2026-08-08', 'entregue', 'Pagamento integral', 0, 22000, 37),
+(38, 1038, 3, 13, 10, 9, 56000, '2026-08-08 09:00:00', '2026-08-09', 'entregue', 'Pagamento integral', 0, 30000, 38),
+(39, 1039, 3, 14, 10, 9, 98000, '2026-08-09 11:00:00', '2026-08-11', 'aberta', 'Aberta há mais de 7 dias', 0, 25000, 39),
+(40, 1040, 3, 15, 10, 9, 30000, '2026-08-10 13:00:00', '2026-08-12', 'cancelado', 'Serviço cancelado', 0, 0, 40);
+
 
 -- =========================================================
 -- 13. ITENS DE OS
