@@ -165,10 +165,9 @@ CREATE TABLE IF NOT EXISTS `motriz`.`veiculo` (
   `cor` VARCHAR(45) NOT NULL,
   `tipo_de_combustivel` VARCHAR(45) NOT NULL,
   `quilometragem` INT(11) NOT NULL,
-  `cliente_id` INT(11) NOT NULL,
+  `cliente_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `placa_UNIQUE` (`placa` ASC) ,
-  INDEX `fk_veiculo_cliente_idx` (`cliente_id` ASC) ,
   CONSTRAINT `fk_veiculo_cliente`
     FOREIGN KEY (`cliente_id`)
     REFERENCES `motriz`.`cliente` (`id`)
@@ -192,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `motriz`.`ordem_de_servico` (
   `quilometragem` INT(11) NOT NULL,
   `data_e_hora` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
   `previsao_de_entrega` DATE NULL DEFAULT NULL,
-  `status` ENUM('aberta', 'orçamento', 'aprovada', 'em_execução', 'aguardando_peca', 'finalizada', 'entregue', 'cancelado') NOT NULL DEFAULT 'aberta',
+  `status` ENUM('aberta', 'orçamento', 'aprovada', 'em_execução', 'aguardando_peca', 'finalizada', 'entregue', 'cancelado') NULL DEFAULT 'aberta',
   `observações` VARCHAR(255) NULL DEFAULT NULL,
   `desconto_gerente` INT(11) NOT NULL,
   `preco_total_os` INT(11) NULL DEFAULT NULL,
@@ -333,6 +332,7 @@ CREATE TABLE IF NOT EXISTS `motriz`.`movimentacao` (
   `motivo` VARCHAR(255) NOT NULL,
   `colaborador_id` INT(11) NOT NULL,
   `os_id` INT(11) NULL DEFAULT NULL,
+  `tipo` ENUM('entrada', 'saida') NOT NULL DEFAULT 'entrada',
   PRIMARY KEY (`id`),
   INDEX `fk_movimentacao_peca_idx` (`peca_id` ASC) ,
   INDEX `fk_movimentacao_fornecedor_idx` (`fornecedor_id` ASC) ,

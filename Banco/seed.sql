@@ -325,10 +325,17 @@ VALUES
 
 INSERT INTO ordem_de_servico
 (id, numero, unidade_id, veiculo_id, mecanico_id, atendente_id,
+ quilometragem, data_e_hora, previsao_de_entrega,
+ observações, desconto_gerente, preco_total_os)
+VALUES
+(1, 1001, 1, 1, 4, 3, 65000, '2026-05-05 09:00:00', '2026-05-06', 'Troca de óleo e revisão', 0, 18000);
+
+
+INSERT INTO ordem_de_servico
+(id, numero, unidade_id, veiculo_id, mecanico_id, atendente_id,
  quilometragem, data_e_hora, previsao_de_entrega, status,
  observações, desconto_gerente, preco_total_os)
 VALUES
-(1, 1001, 1, 1, 4, 3, 65000, '2026-05-05 09:00:00', '2026-05-06', 'finalizada', 'Troca de óleo e revisão', 0, 18000),
 (2, 1002, 1, 2, 4, 3, 72000, '2026-05-08 10:00:00', '2026-05-09', 'entregue', 'Revisão de freios', 1000, 30000),
 (3, 1003, 1, 3, 4, 3, 38000, '2026-05-12 08:30:00', '2026-05-13', 'finalizada', 'Alinhamento', 0, 10000),
 (4, 1004, 1, 4, 4, 3, 45000, '2026-05-18 11:00:00', '2026-05-19', 'entregue', 'Troca de pastilhas', 0, 16000),
@@ -547,175 +554,53 @@ VALUES
 -- =========================================================
 
 INSERT INTO movimentacao
-(id, estoque_atual, peca_id, fornecedor_id, quantidade, quando, motivo, colaborador_id, os_id)
+(id, estoque_atual, peca_id, fornecedor_id, quantidade, quando, motivo, colaborador_id, os_id, tipo)
 VALUES
 -- Entradas
-(1, 5, 1, 1, 5, '2026-05-01 08:00:00', 'Entrada de estoque', 4, NULL),
-(2, 6, 2, 1, 6, '2026-05-02 08:00:00', 'Entrada de estoque', 4, NULL),
-(3, 4, 3, 2, 4, '2026-05-03 08:00:00', 'Entrada de estoque', 4, NULL),
-(4, 5, 4, 4, 5, '2026-05-04 08:00:00', 'Entrada de estoque', 4, NULL),
-(5, 4, 5, 4, 4, '2026-05-04 09:00:00', 'Entrada de estoque', 4, NULL),
-(6, 8, 6, 4, 8, '2026-05-05 08:00:00', 'Entrada de estoque', 8, NULL),
-(7, 5, 7, 3, 5, '2026-05-06 08:00:00', 'Entrada de estoque', 8, NULL),
-(8, 5, 8, 3, 5, '2026-05-07 08:00:00', 'Entrada de estoque', 8, NULL),
-(9, 8, 9, 5, 8, '2026-05-08 08:00:00', 'Entrada de estoque', 8, NULL),
-(10, 8, 10, 5, 8, '2026-05-09 08:00:00', 'Entrada de estoque', 8, NULL),
+(1, 5, 1, 1, 5, '2026-05-01 08:00:00', 'Entrada de estoque', 4, NULL, 'entrada'),
+(2, 6, 2, 1, 6, '2026-05-02 08:00:00', 'Entrada de estoque', 4, NULL, 'entrada'),
+(3, 4, 3, 2, 4, '2026-05-03 08:00:00', 'Entrada de estoque', 4, NULL, 'entrada'),
+(4, 5, 4, 4, 5, '2026-05-04 08:00:00', 'Entrada de estoque', 4, NULL, 'entrada'),
+(5, 4, 5, 4, 4, '2026-05-04 09:00:00', 'Entrada de estoque', 4, NULL, 'entrada'),
+(6, 8, 6, 4, 8, '2026-05-05 08:00:00', 'Entrada de estoque', 8, NULL, 'entrada'),
+(7, 5, 7, 3, 5, '2026-05-06 08:00:00', 'Entrada de estoque', 8, NULL, 'entrada'),
+(8, 5, 8, 3, 5, '2026-05-07 08:00:00', 'Entrada de estoque', 8, NULL, 'entrada'),
+(9, 8, 9, 5, 8, '2026-05-08 08:00:00', 'Entrada de estoque', 8, NULL, 'entrada'),
+(10, 8, 10, 5, 8, '2026-05-09 08:00:00', 'Entrada de estoque', 8, NULL, 'entrada'),
 
 -- Saídas vinculadas às OS
-(11, 4, 1, 1, 1, '2026-05-05 10:00:00', 'Saída para OS', 4, 1),
-(12, 4, 2, 1, 1, '2026-05-08 10:00:00', 'Saída para OS', 4, 2),
-(13, 3, 4, 4, 2, '2026-05-08 11:00:00', 'Saída para OS', 4, 2),
-(14, 4, 5, 4, 1, '2026-05-18 11:00:00', 'Saída para OS', 4, 4),
-(15, 6, 7, 3, 2, '2026-06-05 11:00:00', 'Saída para OS', 8, 8),
-(16, 4, 8, 3, 1, '2026-06-10 09:00:00', 'Saída para OS', 8, 9),
-(17, 7, 9, 5, 1, '2026-06-18 10:00:00', 'Saída para OS', 8, 11),
-(18, 3, 13, 2, 4, '2026-07-02 10:00:00', 'Saída para OS', 4, 14),
-(19, 4, 2, 1, 1, '2026-07-04 11:00:00', 'Saída para OS', 4, 15),
-(20, 3, 16, 3, 1, '2026-07-06 12:00:00', 'Saída para OS', 4, 16),
-(21, 3, 25, 3, 2, '2026-07-08 14:00:00', 'Saída para OS', 4, 17),
-(22, 3, 8, 3, 1, '2026-07-10 09:00:00', 'Saída para OS', 4, 18),
-(23, 3, 10, 5, 1, '2026-07-14 10:00:00', 'Saída para OS', 8, 20),
-(24, 7, 17, 3, 1, '2026-07-17 15:00:00', 'Saída para OS', 8, 22),
-(25, 7, 28, 2, 1, '2026-07-18 09:00:00', 'Saída para OS', 8, 23),
-(26, 4, 10, 5, 1, '2026-07-19 10:00:00', 'Saída para OS', 8, 24),
-(27, 6, 22, 1, 2, '2026-07-20 10:00:00', 'Saída para OS', 10, 25),
-(28, 4, 1, 1, 2, '2026-07-21 10:00:00', 'Saída para OS', 10, 26),
-(29, 3, 4, 4, 1, '2026-07-23 10:00:00', 'Saída para OS', 10, 28),
-(30, 4, 20, 5, 2, '2026-08-01 10:00:00', 'Saída para OS', 4, 31),
-(31, 4, 14, 2, 1, '2026-08-02 10:00:00', 'Saída para OS', 4, 32),
-(32, 2, 15, 3, 1, '2026-08-03 10:00:00', 'Saída para OS', 4, 33),
-(33, 3, 16, 3, 1, '2026-08-04 10:00:00', 'Saída para OS', 4, 34),
-(34, 3, 12, 3, 1, '2026-08-05 09:00:00', 'Saída para OS', 8, 35),
-(35, 7, 9, 5, 1, '2026-08-06 10:00:00', 'Saída para OS', 8, 36),
-(36, 4, 4, 4, 1, '2026-08-07 11:00:00', 'Saída para OS', 8, 37),
-(37, 4, 7, 3, 1, '2026-08-08 10:00:00', 'Saída para OS', 10, 38),
-(38, 2, 23, 1, 1, '2026-08-09 12:00:00', 'Saída para OS', 10, 39),
-(39, 5, 29, 1, 2, '2026-08-10 13:00:00', 'Saída de material', 10, 40),
-(40, 3, 30, 1, 1, '2026-08-10 14:00:00', 'Saída de material', 10, NULL);
+(11, 4, 1, 1, 1, '2026-05-05 10:00:00', 'Saída para OS', 4, 1, 'saida'),
+(12, 4, 2, 1, 1, '2026-05-08 10:00:00', 'Saída para OS', 4, 2, 'saida'),
+(13, 3, 4, 4, 2, '2026-05-08 11:00:00', 'Saída para OS', 4, 2, 'saida'),
+(14, 4, 5, 4, 1, '2026-05-18 11:00:00', 'Saída para OS', 4, 4, 'saida'),
+(15, 6, 7, 3, 2, '2026-06-05 11:00:00', 'Saída para OS', 8, 8, 'saida'),
+(16, 4, 8, 3, 1, '2026-06-10 09:00:00', 'Saída para OS', 8, 9, 'saida'),
+(17, 7, 9, 5, 1, '2026-06-18 10:00:00', 'Saída para OS', 8, 11, 'saida'),
+(18, 3, 13, 2, 4, '2026-07-02 10:00:00', 'Saída para OS', 4, 14, 'saida'),
+(19, 4, 2, 1, 1, '2026-07-04 11:00:00', 'Saída para OS', 4, 15, 'saida'),
+(20, 3, 16, 3, 1, '2026-07-06 12:00:00', 'Saída para OS', 4, 16, 'saida'),
+(21, 3, 25, 3, 2, '2026-07-08 14:00:00', 'Saída para OS', 4, 17, 'saida'),
+(22, 3, 8, 3, 1, '2026-07-10 09:00:00', 'Saída para OS', 4, 18, 'saida'),
+(23, 3, 10, 5, 1, '2026-07-14 10:00:00', 'Saída para OS', 8, 20, 'saida'),
+(24, 7, 17, 3, 1, '2026-07-17 15:00:00', 'Saída para OS', 8, 22, 'saida'),
+(25, 7, 28, 2, 1, '2026-07-18 09:00:00', 'Saída para OS', 8, 23, 'saida'),
+(26, 4, 10, 5, 1, '2026-07-19 10:00:00', 'Saída para OS', 8, 24, 'saida'),
+(27, 6, 22, 1, 2, '2026-07-20 10:00:00', 'Saída para OS', 10, 25, 'saida'),
+(28, 4, 1, 1, 2, '2026-07-21 10:00:00', 'Saída para OS', 10, 26, 'saida'),
+(29, 3, 4, 4, 1, '2026-07-23 10:00:00', 'Saída para OS', 10, 28, 'saida'),
+(30, 4, 20, 5, 2, '2026-08-01 10:00:00', 'Saída para OS', 4, 31, 'saida'),
+(31, 4, 14, 2, 1, '2026-08-02 10:00:00', 'Saída para OS', 4, 32, 'saida'),
+(32, 2, 15, 3, 1, '2026-08-03 10:00:00', 'Saída para OS', 4, 33, 'saida'),
+(33, 3, 16, 3, 1, '2026-08-04 10:00:00', 'Saída para OS', 4, 34, 'saida'),
+(34, 3, 12, 3, 1, '2026-08-05 09:00:00', 'Saída para OS', 8, 35, 'saida'),
+(35, 7, 9, 5, 1, '2026-08-06 10:00:00', 'Saída para OS', 8, 36, 'saida'),
+(36, 4, 4, 4, 1, '2026-08-07 11:00:00', 'Saída para OS', 8, 37, 'saida'),
+(37, 4, 7, 3, 1, '2026-08-08 10:00:00', 'Saída para OS', 10, 38, 'saida'),
+(38, 2, 23, 1, 1, '2026-08-09 12:00:00', 'Saída para OS', 10, 39, 'saida'),
+(39, 5, 29, 1, 2, '2026-08-10 13:00:00', 'Saída de material', 10, 40, 'saida'),
+(40, 3, 30, 1, 1, '2026-08-10 14:00:00', 'Saída de material', 10, NULL, 'saida');
 
--- =========================================================
--- 16. VERIFICAÇÕES
--- =========================================================
 
-SELECT 'UNIDADES' AS tabela, COUNT(*) AS quantidade
-FROM unidade;
-
-SELECT 'COLABORADORES' AS tabela, COUNT(*) AS quantidade
-FROM colaborador;
-
-SELECT 'CLIENTES' AS tabela, COUNT(*) AS quantidade
-FROM cliente;
-
-SELECT 'TELEFONES' AS tabela,
-       SUM(
-         (numero_fixo IS NOT NULL) +
-         (numero_celular IS NOT NULL) +
-         (numero_externo IS NOT NULL)
-       ) AS quantidade_numeros
-FROM telefone;
-
-SELECT 'VEICULOS' AS tabela, COUNT(*) AS quantidade
-FROM veiculo;
-
-SELECT 'CATEGORIAS' AS tabela, COUNT(*) AS quantidade
-FROM categoria;
-
-SELECT 'SERVICOS' AS tabela, COUNT(*) AS quantidade
-FROM servico;
-
-SELECT 'FORNECEDORES' AS tabela, COUNT(*) AS quantidade
-FROM fornecedor;
-
-SELECT 'PECAS' AS tabela, COUNT(*) AS quantidade
-FROM peca;
-
-SELECT 'ORDENS DE SERVICO' AS tabela, COUNT(*) AS quantidade
-FROM ordem_de_servico;
-
-SELECT 'ITENS DE OS' AS tabela, COUNT(*) AS quantidade
-FROM item_os;
-
-SELECT 'PAGAMENTOS' AS tabela, COUNT(*) AS quantidade
-FROM pagamento;
-
-SELECT 'MOVIMENTACOES' AS tabela, COUNT(*) AS quantidade
-FROM movimentacao;
-
--- Status das OS
-SELECT status, COUNT(*) AS quantidade
-FROM ordem_de_servico
-GROUP BY status
-ORDER BY status;
-
--- Clientes com múltiplos veículos
-SELECT cliente_id, COUNT(*) AS quantidade_veiculos
-FROM veiculo
-GROUP BY cliente_id
-HAVING COUNT(*) >= 3;
-
--- Peças sem fornecedor
-SELECT id, nome
-FROM peca
-WHERE fornecedor_id IS NULL;
-
--- Clientes sem telefone
-SELECT c.id, c.nome
-FROM cliente c
-LEFT JOIN telefone t ON t.cliente_id = c.id
-WHERE t.id IS NULL;
-
--- Clientes com 2 ou mais números
-SELECT
-    c.id,
-    c.nome,
-    (
-      (t.numero_fixo IS NOT NULL) +
-      (t.numero_celular IS NOT NULL) +
-      (t.numero_externo IS NOT NULL)
-    ) AS quantidade_numeros
-FROM cliente c
-JOIN telefone t ON t.cliente_id = c.id
-WHERE
-    (
-      (t.numero_fixo IS NOT NULL) +
-      (t.numero_celular IS NOT NULL) +
-      (t.numero_externo IS NOT NULL)
-    ) >= 2;
-
--- Peças cujo estoque atual está abaixo do mínimo
-SELECT
-    p.id,
-    p.nome,
-    p.estoque_minimo,
-    m.estoque_atual
-FROM peca p
-JOIN movimentacao m ON m.id = (
-    SELECT MAX(m2.id)
-    FROM movimentacao m2
-    WHERE m2.peca_id = p.id
-)
-WHERE m.estoque_atual < p.estoque_minimo;
-
--- OS abertas há mais de 7 dias
-SELECT
-    id,
-    numero,
-    status,
-    data_e_hora
-FROM ordem_de_servico
-WHERE status = 'aberta'
-  AND data_e_hora < DATE_SUB(NOW(), INTERVAL 7 DAY);
-
--- OS finalizadas sem pagamento
-SELECT
-    os.id,
-    os.numero,
-    os.status
-FROM ordem_de_servico os
-LEFT JOIN pagamento p ON p.os_id = os.id
-WHERE os.status = 'finalizada'
-GROUP BY os.id, os.numero, os.status
-HAVING COUNT(p.id) = 0;
 
 COMMIT;
 
