@@ -211,8 +211,8 @@ CREATE TABLE IF NOT EXISTS `motriz`.`ordem_de_servico` (
   CONSTRAINT `fk_os_mecanico`
     FOREIGN KEY (`mecanico_id`)
     REFERENCES `motriz`.`colaborador` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
   CONSTRAINT `fk_os_unidade`
     FOREIGN KEY (`unidade_id`)
     REFERENCES `motriz`.`unidade` (`id`)
@@ -269,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `motriz`.`servico` (
   `status` ENUM('ativo', 'inativo') NOT NULL DEFAULT 'ativo',
   `categoria_id` INT(11) NOT NULL,
   `codigo` VARCHAR(45) NOT NULL,
-  `colaborador_id` INT(11) NOT NULL,
+  `colaborador_id` INT(11) NULL,
   `quantidade` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) ,
@@ -283,8 +283,8 @@ CREATE TABLE IF NOT EXISTS `motriz`.`servico` (
   CONSTRAINT `fk_servico_colaborador`
     FOREIGN KEY (`colaborador_id`)
     REFERENCES `motriz`.`colaborador` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL)
 ENGINE = InnoDB
 AUTO_INCREMENT = 26
 DEFAULT CHARACTER SET = utf8mb4;
@@ -337,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `motriz`.`movimentacao` (
   `quantidade` INT(11) NOT NULL,
   `quando` DATETIME NOT NULL,
   `motivo` VARCHAR(255) NOT NULL,
-  `colaborador_id` INT(11) NOT NULL,
+  `colaborador_id` INT(11) NULL,
   `os_id` INT(11) NULL DEFAULT NULL,
   `tipo` ENUM('entrada', 'saida') NOT NULL DEFAULT 'entrada',
   PRIMARY KEY (`id`),
@@ -348,8 +348,8 @@ CREATE TABLE IF NOT EXISTS `motriz`.`movimentacao` (
   CONSTRAINT `fk_movimentacao_colaborador`
     FOREIGN KEY (`colaborador_id`)
     REFERENCES `motriz`.`colaborador` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
   CONSTRAINT `fk_movimentacao_fornecedor`
     FOREIGN KEY (`fornecedor_id`)
     REFERENCES `motriz`.`fornecedor` (`id`)
