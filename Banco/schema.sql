@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`colaborador` (
   `perfil` ENUM('admin', 'gerente', 'atendente', 'mecanico', 'supervisor') NOT NULL,
   `data_de_admissao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` ENUM('ativo', 'inativo') NOT NULL DEFAULT 'ativo',
-  `colaborador_id` INT NOT NULL,
+  `colaborador_id` INT NULL,
   `unidade_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) ,
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`servico` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) ,
   INDEX `fk_servicos_colaborador_idx` (`colaborador_id` ASC) ,
-  INDEX `FK_servico_categoria_idx` (`categoria_id` ASC) ,
+  INDEX `fk_servico_categoria_idx` (`categoria_id` ASC) ,
   CONSTRAINT `fk_servico_colaborador`
     FOREIGN KEY (`colaborador_id`)
     REFERENCES `Motriz`.`colaborador` (`id`)
@@ -241,39 +241,7 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`peca` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `Motriz`.`movimentacao`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Motriz`.`movimentacao` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `estoque_atual` INT NOT NULL,
-  `peca_id` INT NOT NULL,
-  `fornecedor_id` INT NOT NULL,
-  `quantidade` INT NOT NULL,
-  `quando` DATETIME NOT NULL,
-  `motivo` VARCHAR(255) NOT NULL,
-  `colaborador_id` INT NOT NULL,
-  `os_id` INT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_painel_peca_idx` (`peca_id` ASC) ,
-  INDEX `fk_painel_fornecedor_idx` (`fornecedor_id` ASC) ,
-  INDEX `fk_painel_colaborador_idx` (`colaborador_id` ASC) ,
-  CONSTRAINT `fk_movimentacao_peca`
-    FOREIGN KEY (`peca_id`)
-    REFERENCES `Motriz`.`peca` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_movimentacao_fornecedor`
-    FOREIGN KEY (`fornecedor_id`)
-    REFERENCES `Motriz`.`fornecedor` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_movimentacao_colaborador`
-    FOREIGN KEY (`colaborador_id`)
-    REFERENCES `Motriz`.`colaborador` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -297,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`ordem_de_servico` (
   INDEX `fk_os_veiculo_idx` (`veiculo_id` ASC) ,
   INDEX `fk_os_mecanico_idx` (`mecanico_id` ASC) ,
   INDEX `fk_os_atendente_idx` (`atendente_id` ASC) ,
-  UNIQUE INDEX `unidade_id_UNIQUE` (`unidade_id` ASC) ,
+  INDEX `fk_os_unidade_idx` (`unidade_id` ASC),
   CONSTRAINT `fk_os_veiculo`
     FOREIGN KEY (`veiculo_id`)
     REFERENCES `Motriz`.`veiculo` (`id`)
@@ -320,39 +288,88 @@ CREATE TABLE IF NOT EXISTS `Motriz`.`ordem_de_servico` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `Motriz`.`movimentacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Motriz`.`movimentacao` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `estoque_atual` INT NOT NULL,
+  `peca_id` INT NOT NULL,
+  `fornecedor_id` INT NOT NULL,
+  `quantidade` INT NOT NULL,
+  `quando` DATETIME NOT NULL,
+  `motivo` VARCHAR(255) NOT NULL,
+  `colaborador_id` INT NOT NULL,
+  `os_id` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_movimentacao_peca_idx` (`peca_id` ASC) ,
+  INDEX `fk_movimentacao_fornecedor_idx` (`fornecedor_id` ASC) ,
+  INDEX `fk_movimentacao_colaborador_idx` (`colaborador_id` ASC) ,
+  INDEX `fk_movimentacao_os_idx` (`os_id` ASC),
+
+  CONSTRAINT `fk_movimentacao_peca`
+    FOREIGN KEY (`peca_id`)
+    REFERENCES `Motriz`.`peca` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_movimentacao_fornecedor`
+    FOREIGN KEY (`fornecedor_id`)
+    REFERENCES `Motriz`.`fornecedor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_movimentacao_colaborador`
+    FOREIGN KEY (`colaborador_id`)
+    REFERENCES `Motriz`.`colaborador` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT `fk_movimentacao_os`
+  FOREIGN KEY (`os_id`)
+  REFERENCES `Motriz`.`ordem_de_servico` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION
+
+    )
+ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `Motriz`.`item_os`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Motriz`.`item_os` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `peca_id` INT NOT NULL,
-  `servico_id` INT NOT NULL,
+  `peca_id` INT NULL,
+  `servico_id` INT NULL,
   `os_id` INT NOT NULL,
   `quantidade_peca` INT NULL,
   `quantidade_servico` INT NULL,
   `preco_total_peca` INT NULL,
   `preco_total_servico` INT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `peca_id_UNIQUE` (`peca_id` ASC) ,
-  UNIQUE INDEX `servico_id_UNIQUE` (`servico_id` ASC) ,
-  INDEX `fk_servico_os_peca_os_idx` (`os_id` ASC) ,
+
+  INDEX `fk_item_os_peca_idx` (`peca_id` ASC),
+  INDEX `fk_item_os_servico_idx` (`servico_id` ASC),
+  INDEX `fk_item_os_os_idx` (`os_id` ASC),
+
   CONSTRAINT `fk_item_os_peca`
     FOREIGN KEY (`peca_id`)
     REFERENCES `Motriz`.`peca` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
+
   CONSTRAINT `fk_item_os_servico`
     FOREIGN KEY (`servico_id`)
     REFERENCES `Motriz`.`servico` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
+
   CONSTRAINT `fk_item_os_os`
     FOREIGN KEY (`os_id`)
     REFERENCES `Motriz`.`ordem_de_servico` (`id`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE
+)
 ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
