@@ -1,6 +1,6 @@
 Por que a tabela de telefone existe em vez de três colunas no cliente?
 
-- A tabela de telefone existe para evitar a violação da regra 1FN que diz que não pode repetir nomes de colunas e também para poder controlar melhor as regras de negócios.
+- A tabela de telefone existe para transformar uma relação de 1 para Muitos (1:N) em uma estrutura limpa, normalizada e indexável, impedindo o surgimento de colunas nulas e facilitando consultas e manutenções futuras.
 
 2	Por que o preço fica repetido dentro do item da OS, se ele já está no catálogo. Isso não fere a normalização?
 
