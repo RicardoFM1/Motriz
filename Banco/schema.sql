@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `motriz`.`ordem_de_servico` (
   `data_e_hora` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
   `previsao_de_entrega` DATE NULL DEFAULT NULL,
   `status` ENUM('aberta', 'orçamento', 'aprovada', 'em_execução', 'aguardando_peca', 'finalizada', 'entregue', 'cancelado') NOT NULL DEFAULT 'aberta',
-  `observaçoes` VARCHAR(255) NULL DEFAULT NULL,
+  `observacoes` VARCHAR(255) NULL DEFAULT NULL,
   `desconto_gerente` INT(11) NOT NULL,
   `preco_total_os` INT(11) NULL DEFAULT NULL,
   `cliente_id` INT NOT NULL,

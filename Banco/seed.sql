@@ -179,7 +179,7 @@ VALUES
 -- =========================================================
 
 INSERT INTO veiculo
-(id, placa, marca, modelo, ano_fabricacao, cor, tipo_de_combustivel, quilometragem, cliente_id)
+(id, placa, marca, modelo, ano_de_fabricacao, cor, tipo_de_combustivel, quilometragem, cliente_id)
 VALUES
 (1, 'ABC1D23', 'Toyota', 'Corolla', 2020, 'Prata', 'Flex', 65000, 1),
 (2, 'ABC2D34', 'Honda', 'Civic', 2019, 'Preto', 'Flex', 72000, 1),
@@ -306,33 +306,33 @@ VALUES
 -- =========================================================
 
 INSERT INTO servico
-(id, nome, descricao, preco_de_tabela, tempo_estimado, status, categoria_id, codigo, colaborador_id, quantidade)
+(id, nome, descricao, preco_de_tabela, tempo_estimado, status, categoria_id, codigo, colaborador_id)
 VALUES
-(1, 'Troca de óleo', 'Troca de óleo do motor', 12000, '01:00:00', 'ativo', 1, 'SRV001', 3, 1),
-(2, 'Troca de filtro de óleo', 'Substituição do filtro de óleo', 6000, '00:30:00', 'ativo', 1, 'SRV002', 3, 1),
-(3, 'Revisão do motor', 'Inspeção geral do motor', 25000, '03:00:00', 'ativo', 2, 'SRV003', 4, 1),
-(4, 'Limpeza do sistema', 'Limpeza do sistema de arrefecimento', 18000, '02:00:00', 'ativo', 3, 'SRV004', 4, 1),
-(5, 'Troca de fluido', 'Troca do fluido de arrefecimento', 15000, '01:30:00', 'ativo', 3, 'SRV005', 4, 1),
-(6, 'Revisão de freios', 'Inspeção completa do sistema de freios', 22000, '02:00:00', 'ativo', 4, 'SRV006', 4, 1),
-(7, 'Troca de pastilhas', 'Substituição das pastilhas', 16000, '01:30:00', 'ativo', 5, 'SRV007', 4, 1),
-(8, 'Troca de discos', 'Substituição dos discos de freio', 20000, '02:00:00', 'ativo', 4, 'SRV008', 8, 1),
-(9, 'Revisão da suspensão', 'Inspeção do conjunto da suspensão', 24000, '02:30:00', 'ativo', 6, 'SRV009', 8, 1),
-(10, 'Troca de amortecedores', 'Substituição dos amortecedores', 30000, '03:00:00', 'ativo', 7, 'SRV010', 8, 1),
-(11, 'Diagnóstico elétrico', 'Diagnóstico do sistema elétrico', 18000, '01:30:00', 'ativo', 8, 'SRV011', 10, 1),
-(12, 'Troca de bateria', 'Substituição da bateria', 8000, '00:30:00', 'ativo', 9, 'SRV012', 10, 1),
-(13, 'Revisão da injeção', 'Diagnóstico da injeção eletrônica', 26000, '02:30:00', 'ativo', 10, 'SRV013', 10, 1),
-(14, 'Limpeza de bicos', 'Limpeza dos bicos injetores', 20000, '02:00:00', 'ativo', 10, 'SRV014', 10, 1),
-(15, 'Alinhamento', 'Alinhamento da direção', 10000, '01:00:00', 'ativo', 12, 'SRV015', 4, 1),
-(16, 'Balanceamento', 'Balanceamento das rodas', 9000, '01:00:00', 'ativo', 11, 'SRV016', 8, 1),
-(17, 'Rodízio de pneus', 'Rodízio dos pneus', 7000, '00:45:00', 'ativo', 11, 'SRV017', 8, 1),
-(18, 'Funilaria leve', 'Reparo de pequenos amassados', 35000, '04:00:00', 'ativo', 13, 'SRV018', 8, 1),
-(19, 'Pintura de peça', 'Pintura de peça automotiva', 45000, '06:00:00', 'ativo', 14, 'SRV019', 8, 1),
-(20, 'Polimento', 'Polimento externo completo', 28000, '03:00:00', 'ativo', 14, 'SRV020', 4, 1),
-(21, 'Diagnóstico eletrônico', 'Scanner automotivo completo', 15000, '01:00:00', 'ativo', 15, 'SRV021', 10, 1),
-(22, 'Revisão preventiva', 'Revisão preventiva geral', 32000, '04:00:00', 'ativo', 15, 'SRV022', 4, 1),
-(23, 'Troca de correia', 'Substituição da correia dentada', 28000, '03:00:00', 'ativo', 2, 'SRV023', 4, 1),
-(24, 'Troca de velas', 'Substituição das velas de ignição', 12000, '01:00:00', 'ativo', 10, 'SRV024', 10, 1),
-(25, 'Revisão completa', 'Revisão completa do veículo', 50000, '05:00:00', 'ativo', 15, 'SRV025', 4, 1);
+(1, 'Troca de óleo', 'Troca de óleo do motor', 12000, '01:00:00', 'ativo', 1, 'SRV001', 3),
+(2, 'Troca de filtro de óleo', 'Substituição do filtro de óleo', 6000, '00:30:00', 'ativo', 1, 'SRV002', 3),
+(3, 'Revisão do motor', 'Inspeção geral do motor', 25000, '03:00:00', 'ativo', 2, 'SRV003', 4),
+(4, 'Limpeza do sistema', 'Limpeza do sistema de arrefecimento', 18000, '02:00:00', 'ativo', 3, 'SRV004', 4),
+(5, 'Troca de fluido', 'Troca do fluido de arrefecimento', 15000, '01:30:00', 'ativo', 3, 'SRV005', 4),
+(6, 'Revisão de freios', 'Inspeção completa do sistema de freios', 22000, '02:00:00', 'ativo', 4, 'SRV006', 4),
+(7, 'Troca de pastilhas', 'Substituição das pastilhas', 16000, '01:30:00', 'ativo', 5, 'SRV007', 4),
+(8, 'Troca de discos', 'Substituição dos discos de freio', 20000, '02:00:00', 'ativo', 4, 'SRV008', 8),
+(9, 'Revisão da suspensão', 'Inspeção do conjunto da suspensão', 24000, '02:30:00', 'ativo', 6, 'SRV009', 8),
+(10, 'Troca de amortecedores', 'Substituição dos amortecedores', 30000, '03:00:00', 'ativo', 7, 'SRV010', 8),
+(11, 'Diagnóstico elétrico', 'Diagnóstico do sistema elétrico', 18000, '01:30:00', 'ativo', 8, 'SRV011', 10),
+(12, 'Troca de bateria', 'Substituição da bateria', 8000, '00:30:00', 'ativo', 9, 'SRV012', 10),
+(13, 'Revisão da injeção', 'Diagnóstico da injeção eletrônica', 26000, '02:30:00', 'ativo', 10, 'SRV013', 10),
+(14, 'Limpeza de bicos', 'Limpeza dos bicos injetores', 20000, '02:00:00', 'ativo', 10, 'SRV014', 10),
+(15, 'Alinhamento', 'Alinhamento da direção', 10000, '01:00:00', 'ativo', 12, 'SRV015', 4),
+(16, 'Balanceamento', 'Balanceamento das rodas', 9000, '01:00:00', 'ativo', 11, 'SRV016', 8),
+(17, 'Rodízio de pneus', 'Rodízio dos pneus', 7000, '00:45:00', 'ativo', 11, 'SRV017', 8),
+(18, 'Funilaria leve', 'Reparo de pequenos amassados', 35000, '04:00:00', 'ativo', 13, 'SRV018', 8),
+(19, 'Pintura de peça', 'Pintura de peça automotiva', 45000, '06:00:00', 'ativo', 14, 'SRV019', 8),
+(20, 'Polimento', 'Polimento externo completo', 28000, '03:00:00', 'ativo', 14, 'SRV020', 4),
+(21, 'Diagnóstico eletrônico', 'Scanner automotivo completo', 15000, '01:00:00', 'ativo', 15, 'SRV021', 10),
+(22, 'Revisão preventiva', 'Revisão preventiva geral', 32000, '04:00:00', 'ativo', 15, 'SRV022', 4),
+(23, 'Troca de correia', 'Substituição da correia dentada', 28000, '03:00:00', 'ativo', 2, 'SRV023', 4),
+(24, 'Troca de velas', 'Substituição das velas de ignição', 12000, '01:00:00', 'ativo', 10, 'SRV024', 10),
+(25, 'Revisão completa', 'Revisão completa do veículo', 50000, '05:00:00', 'ativo', 15, 'SRV025', 4);
 
 -- =========================================================
 -- 12. ORDENS DE SERVIÇO
@@ -347,7 +347,7 @@ VALUES
 INSERT INTO ordem_de_servico
 (id, numero, unidade_id, veiculo_id, mecanico_id, atendente_id,
  quilometragem, data_e_hora, previsao_de_entrega,
- observações, desconto_gerente, preco_total_os, cliente_id)
+ observacoes, desconto_gerente, preco_total_os, cliente_id)
 VALUES
 (1, 1001, 1, 1, 4, 3, 65000, '2026-05-05 09:00:00', '2026-05-06', 'Troca de óleo e revisão', 0, 18000, 1);
 
@@ -355,7 +355,7 @@ VALUES
 INSERT INTO ordem_de_servico
 (id, numero, unidade_id, veiculo_id, mecanico_id, atendente_id,
  quilometragem, data_e_hora, previsao_de_entrega, status,
- observações, desconto_gerente, preco_total_os, cliente_id)
+ observacoes, desconto_gerente, preco_total_os, cliente_id)
 VALUES
 (2, 1002, 1, 2, 4, 3, 72000, '2026-05-08 10:00:00', '2026-05-09', 'entregue', 'Revisão de freios', 1000, 30000, 2),
 (3, 1003, 1, 3, 4, 3, 38000, '2026-05-12 08:30:00', '2026-05-13', 'finalizada', 'Alinhamento', 0, 10000, 3),
