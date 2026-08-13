@@ -10,12 +10,14 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 
 -- -----------------------------------------------------
 -- Schema motriz
+-- Criação do schema (database) do sistema.
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `motriz` DEFAULT CHARACTER SET utf8mb4 ;
 USE `motriz` ;
 
 -- -----------------------------------------------------
 -- Table `motriz`.`subcategoria`
+-- Criação da tabela subcategoria, onde é filha da tabela categoria.
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `motriz`.`subcategoria` (
   `id` INT(11) NOT NULL,
@@ -27,6 +29,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `motriz`.`categoria`
+-- Criação da tabela categoria, onde é pai da tabela subcategoria, sendo assim, uma categoria pode ter várias subcategorias.
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `motriz`.`categoria` (
   `id` INT(11) NOT NULL,
@@ -46,6 +49,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `motriz`.`endereco`
+-- Criação da tabela endereço, que é utilizada para cliente e unidade. Filha das duas tabelas.
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `motriz`.`endereco` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -64,6 +68,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `motriz`.`cliente`
+-- Criação da tabela cliente, utilizada para cadastro na OS e também do veículo.
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `motriz`.`cliente` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -435,7 +440,6 @@ CREATE TABLE IF NOT EXISTS `motriz`.`telefone` (
   `numero_externo` VARCHAR(45) NULL DEFAULT NULL,
   `cliente_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `cliente_id_UNIQUE` (`cliente_id` ASC) ,
   UNIQUE INDEX `numero_celular_UNIQUE` (`numero_celular` ASC) ,
   INDEX `fk_telefone_cliente_idx` (`cliente_id` ASC) ,
   CONSTRAINT `fk_telefone_cliente`
